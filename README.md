@@ -1,111 +1,264 @@
-# MemeTruth — Crack the Clock starter
 
-A single-page Streamlit prototype for the challenge: identify the factual claim behind a meme, use Gemini with Google Search grounding to look for evidence, and show a verdict with source links.
+# MemeTruth — Laugh at the Meme. Check the Facts.
 
-## Included features
-- Meme image upload (PNG/JPG/JPEG/WEBP) and optional context
-- Text-only claim input
-- Gemini multimodal analysis
-- Google Search grounding for evidence retrieval
-- Verdict, explanation, limitations, and source links
-- Downloadable fact-check result
-- Responsive, playful retro/comic UI
-- Ready for Streamlit Community Cloud deployment
+**An AI-powered meme fact-checking tool by Team Runtime Rebel**
 
-## Important
-This is a competition prototype, not a definitive fact-checking authority. AI may misread a meme or misinterpret sources. Always open the source links and review the result. The app sends the image/text to Google's Gemini API when you analyze it.
+MemeTruth helps users check the information behind memes and viral text. It aims to bridge the gap between humor and truth by helping people question claims before believing or sharing them.
 
-## Run locally (Laptop 1 or Laptop 3)
-1. Install Python 3.10 or newer.
-2. Extract this ZIP.
-3. Open a terminal in the extracted `MemeTruth_Competition_Starter` folder.
-4. Create and activate a virtual environment (optional but recommended):
+---
 
-   Windows:
-   ```powershell
-   py -m venv .venv
-   .venv\Scripts\activate
-   ```
+## 📌 Problem Statement
 
-   macOS/Linux:
-   ```bash
-   python3 -m venv .venv
-   source .venv/bin/activate
-   ```
+People often remember the joke in a meme but forget whether the information behind it is actually true.
 
-5. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-6. Start the app:
-   ```bash
-   streamlit run app.py
-   ```
-7. Open the local URL shown in the terminal (usually http://localhost:8501).
+Memes make information entertaining and easy to share, but factual claims hidden behind humor may go unchecked. This can allow misleading information to spread.
 
-## API key
-The app requires a Gemini API key for live AI analysis.
+## 💡 Our Solution
 
-- Create/get a key through Google AI Studio.
-- For a quick local test, open **API setup / settings** inside the app and paste the key. It is held only in the current app session.
-- For deployment, add a secret in Streamlit Community Cloud:
-  ```toml
-  GEMINI_API_KEY = "your-key-here"
-  GEMINI_MODEL = "gemini-2.5-flash"
-  ```
-- Never commit your real key to GitHub or put it in frontend code.
+MemeTruth bridges the gap between humor and truth.
 
-## Deploy to Streamlit Community Cloud
-1. One team member creates a GitHub repository.
-2. Upload `app.py`, `requirements.txt`, and `README.md` to the repository root.
-3. Push/commit the files.
-4. Open https://share.streamlit.io/ and sign in with GitHub.
-5. Choose **Create app**, select the repository and branch, and set the main file path to `app.py`.
-6. In app settings → **Secrets**, add:
-   ```toml
-   GEMINI_API_KEY = "your-key-here"
-   GEMINI_MODEL = "gemini-2.5-flash"
-   ```
-7. Deploy. Wait for the app to build, then open the public URL on a second device or incognito window.
-8. Test both text input and image upload on the deployed URL.
+It allows users to upload a meme image or enter text and receive an AI-generated fact-checking assessment, an explanation, and supporting sources where available.
 
-## Team split (4 people, 3 laptops)
-### Gayatri — integration / team lead (Laptop 1)
-- Own the main GitHub repository and app integration.
-- Start the app locally and confirm the first successful analysis.
-- Keep the final scope small and coordinate the surprise-round changes.
+Our goal is to make fact-checking more accessible and encourage responsible information sharing.
 
-### Sneha — UI / experience (Laptop 2)
-- Run the app and refine labels, copy, spacing, and visual consistency.
-- Test mobile layout and the upload/paste flow.
-- Do not create a separate frontend; edit the Streamlit UI in `app.py` only after coordinating changes.
+---
 
-### Janhvi — deployment / setup (Laptop 3)
-- Create the GitHub repository and deploy to Streamlit Community Cloud.
-- Configure secrets safely.
-- Verify the public URL works outside the local network.
+## ✨ Features
 
-### Sharayu — evidence QA / demo (Computer lab PC)
-- Prepare 3–5 test examples with known source pages.
-- Check whether extracted claims preserve the meme's meaning.
-- Verify sources actually support/contradict the verdict.
-- Write a 60-second demo script and note bugs for the team.
+- **Meme Image Analysis:** Upload a meme image for analysis.
+- **Text Fact-Checking:** Enter a claim, caption, or text to investigate.
+- **AI-Powered Analysis:** Use Google's Gemini API to analyze submitted content.
+- **Web Search Grounding:** Use Google Search grounding when supported by the configured model.
+- **Verdict and Explanation:** Display an assessment with a readable explanation.
+- **Source Links:** Show supporting sources when available.
+- **Uncertainty and Limitations:** Highlight cases where a claim cannot be confidently verified.
+- **Downloadable Report:** Download the analysis report for later reference.
 
-Adjust names/roles as needed. Only one person should edit `app.py` at a time unless you split code into separate files deliberately.
+> Note: AI-generated assessments may be incorrect or incomplete. Users should review available sources and independently verify important claims.
 
-## Two-hour execution plan
-- 0–10 min: unzip, install dependencies, obtain API key, create GitHub repo.
-- 10–25 min: get app running locally; test one pasted claim.
-- 25–45 min: test image upload and inspect output/source links.
-- 30–60 min (in parallel): deploy the first version early.
-- 60–85 min: fix the most important issues; test the public URL.
-- 85–100 min: prepare for the surprise/twist and make changes.
-- 100–115 min: retest the live app, confirm secrets and links.
-- 115–120 min: freeze changes, prepare submission/demo.
+---
 
-## If something fails
-- **No API key:** UI loads, but analysis will not run until a valid key is supplied.
-- **API error / quota:** Show the error to the team; do not present sample output as a live fact-check. Try again with a smaller image or use pasted text.
-- **No sources returned:** Treat the result as unverified; retry and check the model/API response.
-- **Deployment build fails:** Check Python version/dependencies in Streamlit logs; confirm `app.py` is at the repository root.
-- **Time is running out:** Keep text-based analysis, source links, and deployment. Drop optional polish first.
+## 🛠️ Technology Stack
+
+| Technology | Purpose |
+|---|---|
+| Python | Main programming language and application logic |
+| Streamlit | Web application interface |
+| Google Gemini API | AI-powered content analysis |
+| Google Search grounding | Web-grounded information, where supported |
+| Python Requests | HTTP communication with the API |
+| Streamlit Community Cloud | Deployment platform |
+
+### Why Python?
+
+Python powers the main application in `app.py`. It handles user inputs, communicates with the Gemini API, processes the response, and displays the results through Streamlit.
+
+Streamlit allows us to build an interactive website using Python.
+
+---
+
+## 🔄 How It Works
+
+1. **User Input:** The user uploads a meme image or enters text.
+2. **Content Processing:** The application prepares the submitted content for analysis.
+3. **AI Analysis:** The application sends a request to the configured Gemini model.
+4. **Fact-Checking:** The model analyzes the claim and may use Google Search grounding, where available.
+5. **Results:** MemeTruth displays the assessment, explanation, limitations, and available sources.
+6. **Report:** The user can download the analysis report.
+
+---
+
+## 📁 Project Structure
+
+```text
+MemeTruth/
+├── app.py
+├── requirements.txt
+├── README.md
+├── .gitignore
+└── .streamlit/
+    └── secrets.toml
+```
+
+**Important:** The `.streamlit/secrets.toml` file is for local secrets. Do not upload it to GitHub.
+
+---
+
+## ⚙️ Installation and Setup
+
+### Prerequisites
+
+- Python 3.12 recommended
+- Git
+- A Google Gemini API key
+- Internet connection
+
+### Step 1: Clone the Repository
+
+```bash
+git clone https://github.com/gayatrissuryawanshi/MemeTruth.git
+cd MemeTruth
+```
+
+### Step 2: Create a Virtual Environment
+
+On Windows:
+
+```bash
+py -3.12 -m venv .venv
+```
+
+Activate it using Command Prompt:
+
+```bat
+.venv\Scripts\activate.bat
+```
+
+Or using PowerShell:
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+If PowerShell blocks activation, use Command Prompt or run the virtual environment's Python executable directly.
+
+### Step 3: Install Dependencies
+
+```bash
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```
+
+### Step 4: Configure the Gemini API Key
+
+Get an API key from Google AI Studio:
+
+https://aistudio.google.com/
+
+For local Streamlit configuration, create the file:
+
+`.streamlit/secrets.toml`
+
+Add:
+
+```toml
+GEMINI_API_KEY = "YOUR_GEMINI_API_KEY"
+```
+
+Replace the placeholder with your actual API key.
+
+**Security:** Never commit your real API key, `.env`, or `secrets.toml` to GitHub.
+
+### Step 5: Run the Application
+
+```bash
+python -m streamlit run app.py
+```
+
+Open the local URL provided by Streamlit. It is usually:
+
+```text
+http://localhost:8501
+```
+
+---
+
+## 🔑 API Configuration and Troubleshooting
+
+MemeTruth requires a valid Gemini API key for AI-powered analysis.
+
+The configured Gemini model must be available to your API key and compatible with the application's request format.
+
+| Issue | What to Check |
+|---|---|
+| Invalid API key | Confirm that the key is correct and active |
+| Model not found | Configure a model supported by your API key |
+| Quota exceeded (429) | Check your API quota and usage limits |
+| Network error | Check your internet connection |
+| Sources not displayed | Search grounding and source availability may vary |
+
+API access and usage limits depend on the account, model, and current Google API quota.
+
+---
+
+## ☁️ Deployment
+
+MemeTruth can be deployed using Streamlit Community Cloud.
+
+### Deployment Steps
+
+1. Push the project to GitHub.
+2. Visit https://share.streamlit.io/
+3. Sign in with GitHub.
+4. Select the `MemeTruth` repository.
+5. Select `app.py` as the main file.
+6. Add the required API key in the app's secrets settings.
+7. Deploy the application.
+8. Test the deployed app, including image uploads, text analysis, API responses, and report downloads.
+
+### Streamlit Cloud Secrets
+
+Add the following in the app's secrets settings:
+
+```toml
+GEMINI_API_KEY = "YOUR_GEMINI_API_KEY"
+```
+
+If your application uses a configurable model name, ensure that the configured model matches the one used by `app.py`.
+
+**Deployment status:** Deployment instructions are included. The project should be described as live only after deployment succeeds and the deployed application has been tested.
+
+---
+
+## 👥 Team Runtime Rebel
+
+We are Team Runtime Rebel, working to make fact-checking more accessible in the age of viral memes.
+
+| Team Member | Responsibility |
+|---|---|
+| Gayatri | Team coordination and project integration |
+| Sneha | UI and user experience |
+| Janhvi | Setup and deployment |
+| Sharayu | Evidence review, testing, and demo preparation |
+
+---
+
+## 🎯 Project Objective
+
+Our objective is to encourage users to think critically about information shared through memes and viral content.
+
+MemeTruth aims to make fact-checking approachable and understandable, helping users distinguish between entertaining content and claims that require verification.
+
+---
+
+## 🔮 Future Scope
+
+- Improve claim extraction from complex meme images.
+- Add multilingual meme and text analysis.
+- Improve source quality and source comparison.
+- Provide clearer confidence and uncertainty indicators.
+- Add a history of previous fact-checks.
+- Improve performance, accessibility, and mobile usability.
+- Expand testing for misleading, ambiguous, and context-dependent claims.
+
+---
+
+## ⚠️ Disclaimer
+
+MemeTruth is an educational prototype and should not be treated as an authoritative source of truth.
+
+AI systems can misunderstand sarcasm, context, or factual claims and may produce inaccurate explanations. Search results may also be incomplete or unreliable.
+
+Always review available evidence and consult trustworthy sources before making decisions based on a fact-check.
+
+---
+
+## 📄 License
+
+No license has been specified yet. A license can be added later to define how others may use, modify, and distribute this project.
+
+---
+
+**MemeTruth — Laugh at the Meme. Check the Facts.**
+
+*Built with curiosity by Team Runtime Rebel.*
